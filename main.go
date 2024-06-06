@@ -20,7 +20,7 @@ func main() {
 
 	// fmt.Println("customers: ", customers)
 	// fmt.Println("products: ", products)
-	fmt.Println("orders: ", orders)
+	// fmt.Println("orders: ", orders)
 
 	if err != nil {
 		panic(err.Error())
@@ -32,6 +32,10 @@ func main() {
 		switch userChoice {
 		case 1:
 			createOneProduct(db)
+			products, err = getAllProductsFromDb(db)
+			if err != nil {
+				panic(err.Error())
+			}
 		case 2:
 			fmt.Println("Voici les produits disponibles: ")
 			for _, product := range products {
@@ -64,6 +68,10 @@ func main() {
 			writeProductsToCSV(products)
 		case 6:
 			createOneCustomer(db)
+			customers, err = getAllCustomersFromDb(db)
+			if err != nil {
+				panic(err.Error())
+			}
 		case 7:
 			fmt.Println("Voici les clients: ")
 			for _, customer := range customers {
@@ -85,7 +93,7 @@ func main() {
 		case 10:
 			err := createOneOrder(db, customers, products)
 			if err != nil {
-				panic(err.Error())
+				return
 			}
 
 			orders, err = getAllOrdersFromDb(db)

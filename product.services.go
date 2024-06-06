@@ -14,7 +14,7 @@ func createOneProduct(db *sql.DB) Product {
 	var quantity int
 	var price float32
 
-	title = getStringInput("Entrez le titre du produit: ")
+	title = getTextInput("Entrez le titre du produit: ")
 	description = getTextInput("Entrez la description du produit: ")
 	quantity = getIntInput("Entrez la quantité de produit: ")
 	price = getFloatInput("Entrez le prix du produit: ")
@@ -107,11 +107,11 @@ func modifyOneProductFromDb(db *sql.DB, productId int) error {
 		userChoice = displayProductMenu()
 		switch userChoice {
 		case 1:
-			title := getStringInput("Entrez le titre du produit: ")
+			title := getTextInput("Entrez le titre du produit: ")
 			modifiedFields = append(modifiedFields, "title = ?")
 			modifiedValues = append(modifiedValues, title)
 		case 2:
-			description := getStringInput("Entrez la description du produit: ")
+			description := getTextInput("Entrez la description du produit: ")
 			modifiedFields = append(modifiedFields, "description = ?")
 			modifiedValues = append(modifiedValues, description)
 		case 3:
@@ -187,7 +187,7 @@ func writeProductsToCSV(products []Product) {
 	defer csvFile.Close()
 
 	csvwriter := csv.NewWriter(csvFile)
-	headers := []string{"Nom du produit", "Description", "Quantité", "Prix", "En ligne"}
+	headers := []string{"Titre", "Description", "Quantité", "Prix", "Supprimé"}
 	csvwriter.Write(headers)
 	for _, product := range products {
 		_ = csvwriter.Write(product.toCSVRecord())

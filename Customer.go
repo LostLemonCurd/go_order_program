@@ -15,7 +15,13 @@ type Customer struct {
 }
 
 func (c Customer) toString() {
-	fmt.Printf("Id: %d\nNom: %s\n, Prénom: %s\n, Numéro de Téléphone: %s\n, Email: %s\n, Adresse: %s\n, Total Orders: %.2f", c.Id, c.LastName, c.FirstName, c.PhoneNumber, c.Email, c.Address, c.TotalOrders)
+	var totalOrders float32
+	if c.TotalOrders == 0 {
+		totalOrders = 0
+	} else {
+		totalOrders = c.TotalOrders
+	}
+	fmt.Printf("Id: %d\nNom: %s\nPrénom: %s\nNuméro de Téléphone: %s\nEmail: %s\nAdresse: %s\nTotal Orders: %.2f€\n\n", c.Id, c.LastName, c.FirstName, c.PhoneNumber, c.Email, c.Address, totalOrders)
 }
 
 func (c Customer) toCSVRecord() []string {

@@ -32,17 +32,21 @@ func createOneOrder(db *sql.DB, customers []Customer, products []Product) error 
 		}
 	}
 
-	if quantity > orderProduct.Quantity {
-		err := errors.New("Not enough products sorry")
+	if orderProduct.IsActive == false {
+		err := errors.New("Ce produit est indisponible, désolé")
 		fmt.Println(err)
-		return err
+		return nil
 	}
-	fmt.Println("orderProduct price", orderProduct.Price)
+
+	if quantity > orderProduct.Quantity {
+		err := errors.New("Pas assez de quantité pour ce produit, désolé")
+		fmt.Println(err)
+		return nil
+	}
 	orderPrice := float32(quantity) * orderProduct.Price
 
 	order := Order{Quantity: quantity, Customer: orderCustomer, Product: orderProduct, Price: orderPrice}
 
-	fmt.Println(order)
 	err := insertOneOrderIntoDb(db, order)
 	if err != nil {
 		return err
@@ -138,7 +142,7 @@ func writeOrdersToCSV(orders []Order) {
 	defer csvFile.Close()
 
 	csvwriter := csv.NewWriter(csvFile)
-	headers := []string{"Id", "Customer first name", "Nom du produit", "Quantité", "Prix", "Date de Création"}
+	headers := []string{"Id", "Nom du Client", "Nom du Produit", "Quantité", "Prix", "Date de Commande"}
 	csvwriter.Write(headers)
 	for _, order := range orders {
 		_ = csvwriter.Write(order.toCSVRecord())

@@ -1,3 +1,10 @@
-Id,Customer first name,Nom du produit,Quantité,Prix,Date de Création
+Id,Nom du Client,Nom du Produit,Quantité,Prix,Date de Commande
 1,Cheese,Test1,10,210.00,2024-06-06 14:23:25
 2,Cheese,Test1,2,42.00,2024-06-06 14:26:17
+3,Samuel,Maxime,10,10000.00,2024-06-06 16:07:35
+4,Cheese,Maxime,10,10000.00,2024-06-06 16:13:20
+5,Cheese,Maxime,10,10000.00,2024-06-06 16:15:17
+6,Cheese,Maxime,100,100000.00,2024-06-06 16:21:02
+7,Petit,Nou Pro,20,20.00,2024-06-06 17:18:14
+8,Pierre,Nouveau,20,40.00,2024-06-06 17:20:05
+9,Pierre,Nouveau,30,60.00,2024-06-06 17:21:44

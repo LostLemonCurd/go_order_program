@@ -16,8 +16,8 @@ func createOneCustomer(db *sql.DB) Customer {
 	var email string
 	var address string
 
-	lastName = getStringInput("Entrez le nom du client: ")
-	firstName = getStringInput("Entrez le prénom du client: ")
+	lastName = getTextInput("Entrez le nom du client: ")
+	firstName = getTextInput("Entrez le prénom du client: ")
 	phoneNumber = getStringInput("Entrez le téléphone du client: ")
 	address = getTextInput("Entrez l'adresse du client: ")
 	email = getStringInput("Entrez l'email du client: ")
@@ -102,11 +102,11 @@ func modifyOneCustomerFromDb(db *sql.DB, customerId int) error {
 		userChoice = displayCustomerMenu()
 		switch userChoice {
 		case 1:
-			lastName := getStringInput("Entrez le nom de l'employé: ")
+			lastName := getTextInput("Entrez le nom de l'employé: ")
 			modifiedFields = append(modifiedFields, "lastName = ?")
 			modifiedValues = append(modifiedValues, lastName)
 		case 2:
-			firstName := getStringInput("Entrez le prénom de l'employé: ")
+			firstName := getTextInput("Entrez le prénom de l'employé: ")
 			modifiedFields = append(modifiedFields, "firstName = ?")
 			modifiedValues = append(modifiedValues, firstName)
 		case 3:
@@ -170,7 +170,7 @@ func writeCustomersToCSV(customers []Customer) {
 	defer csvFile.Close()
 
 	csvwriter := csv.NewWriter(csvFile)
-	headers := []string{"Nom", "Prénom", "Numéro de Téléphone", "Email", "Adresse", "Total Orders"}
+	headers := []string{"Nom", "Prénom", "Téléphone", "Email", "Adresse", "Total des Commandes"}
 	csvwriter.Write(headers)
 	for _, customer := range customers {
 		_ = csvwriter.Write(customer.toCSVRecord())
